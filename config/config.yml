@@ -1,0 +1,47 @@
+
+####### EPIC champ pipeline config file : ########
+
+PROJET:  EPIC
+
+# Define all path : 
+RESULT_PATH:  result
+
+# GEO access : 
+GEO: yes # load data to GEO (Gene Expression Omnibus - NCBI) data base 
+GSE_NUM: "GSE191276" 
+
+# STEPS : 
+QC: TRUE
+BACTH_COR:  TRUE 
+CELL_HETERO: TRUE 
+DMPS: TRUE
+DMR: TRUE
+GSEA: TRUE 
+
+# Load data :
+METH_VALUE: B
+FILTER_NO_CG: TRUE 
+FILTER_SNPS: TRUE 
+FILTER_MULTI_HIT: TRUE 
+FILTER_XY: TRUE 
+
+# QC : 
+NORM_METH: BMIQ # by default, method = BMIQ ("PBC","BMIQ","SWAN")
+
+# Bacth effect correction : 
+
+# Cell Heterogeneity (if tissue=Blood) : 
+
+# DMPs
+
+# DMR
+
+# GSEA
+ARRAY_TYPE: EPIC # EPIC / 450K / 850K 
+GSEA_METH: fisher 
+
+# Dendogram
+DIST_METH: euclidean # methode for compute the matrix of distance 
+CLUST_METH:  ward.D2 # methode for hierarchical clustering
+
+#####################################################################
