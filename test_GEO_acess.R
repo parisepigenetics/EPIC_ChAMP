@@ -2,18 +2,25 @@
 library(GEOquery)
 library(Biobase)
 library(ChAMP)
+library(yaml)
 
-getGEOSuppFiles('GSE191276')
-GSE <- getGEO(GEO = 'GSE191276')
+
+# load the config file
+yaml.file <- yaml.load_file('config.yml')
+
+# extract the information from the yaml file
+GSE_NUM <- yaml.file$GSE_NUM
+
+getGEOSuppFiles(GSE_NUM)
+GSE <- getGEO(GEO = GSE_NUM)
 
 pd <- pData(phenoData(GSE[[1]]))
 
-untar(tarfile = 'GSE191276/GSE191276_RAW.tar')
+setwd(paste0(GSE_NUM,"/")) 
+
+untar(tarfile = paste0(GSE_NUM,'_RAW.tar')) 
 idat_files <- list.files(pattern = 'idat.gz')
 
-for(i in 1:length(idat_files)){
-  gunzip(filename = idat_files[i], destname = gsub("[.]gz$", "", idat_files[i]))
-}
 
 list_files <- data.frame(list.files(pattern = "idat"))
 colnames(list_files) <- "Basename"
@@ -67,9 +74,9 @@ ChAMP_csv <- data.frame(
   stringsAsFactors=F)
 
 # a revoir 
-#ChAMP_csv <- na.omit(ChAMP_csv)
+ChAMP_csv <- na.omit(ChAMP_csv)
 
-write.table(ChAMP_csv,"ChAMP.csv", row.names=F, quote=F, sep=",")
+write.table(ChAMP_csv,"pd_ChAMP.csv", row.names=F, quote=F, sep=",")
 
 
 

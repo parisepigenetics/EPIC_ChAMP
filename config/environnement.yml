@@ -1,4 +1,3 @@
-
 name: EPIC_ChAMP_env
 channels:
 - conda-forge
@@ -11,5 +10,3 @@ dependencies:
 - bioconductor-champ
 - r-dplyr
 - geoparse
-
-

@@ -5,10 +5,14 @@ PROJET:  EPIC
 
 # Define all path : 
 RESULT_PATH:  result
+RAW_DATA_PATH: my_bank # if GOE access == yes the RAW_DATA file are the GSE accession number 
 
 # GEO access : 
 GEO: yes # load data to GEO (Gene Expression Omnibus - NCBI) data base 
 GSE_NUM: "GSE191276" 
+
+# Full ChAMP pipeline () 
+FULL: yes 
 
 # STEPS : 
 QC: TRUE

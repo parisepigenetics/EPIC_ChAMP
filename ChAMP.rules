@@ -1,29 +1,35 @@
+
 configfile: "config/config.yml"
 
 result_path =  config["RESULT_PATH"] + "/" +  config["PROJET"]
 geo = config["GEO"] 
-gse = config["GSE_NUM"]
 
 
 if geo == "yes": 
-	rule GEO:
-		output:
-		conda:
-			"config/enironnement.yml"
-		shell:
-			"""
-			Rscript --vanilla test_GEO_acess.R {gse}
-			mkdir -p {result_path}
-			Rscript --vanilla ChAMP_pipeline.R {result_path}
-			
-			"""
-else: 
-	rule ChAMP:
+	rule CSV_GEO:
 		output:
 		conda:
 			"config/environnement.yml"
 		shell:
 			"""
-			mkdir -p {result_path}
-			Rscript --vanilla ChAMP_pipeline.R {result_path}
+			Rscript --vanilla test_GEO_acess.R	
 			"""
+else: 
+	rule CSV_PERSO:
+		output:
+		conda:
+			"config/environnement.yml"
+		shell:
+			"""
+			Rscript --vanilla perso_data_process.R	
+			"""
+
+rule ChAMP:
+	output:
+	conda:
+		"config/environnement.yml"
+	shell:
+		"""
+		mkdir -p {result_path}
+		Rscript --vanilla ChAMP_pipeline.R {result_path}
+		"""
